@@ -7,5 +7,14 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.18.2",
+    "express-session": "^1.17.3",
+    "module": "^1.2.5",
+    "mysql": "^2.18.1",
+    "nodemon": "^2.0.20",
+    "req-flash": "^0.0.3",
+    "session": "^0.1.0"
+  }
 }
