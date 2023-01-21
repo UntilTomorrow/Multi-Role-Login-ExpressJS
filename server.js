@@ -42,5 +42,5 @@ app.use('/', homeRoutes);
 
 //  port server
 app.listen(5050, ()=>{
-    console.log('Server Berjalan di Port : '+5050);
+    console.log('Server Berjalan di Port : '+3000);
 });
