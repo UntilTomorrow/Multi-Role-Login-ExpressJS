@@ -41,9 +41,26 @@ module.exports ={
                             res.redirect('/')
                         } else {
                             req.flash('color','danger');
+                            req.flash('status', 'Ooops...');
+                            req.flash('message', 'Akun Tidak Ditemukan...');
+                            req.redirect('/login');
                         }
-                    })
+                    });
+                    connection.release();
             })
-        }  
-    }
+        }  else {
+            res.redirect('/login');
+            res.end();
+        }
+
+    },
+    logout(req,res){
+        req.session.destroy((err) => {
+            if(err) {
+                return console.log(err);
+            }
+            res.clearCookie('secretname');
+            res.redirect('/login');
+        });
+    },
 }
