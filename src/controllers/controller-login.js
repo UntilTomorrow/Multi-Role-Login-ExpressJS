@@ -18,8 +18,32 @@ module.exports ={
     },
 
     loginAuth(req,res){
-
-        
+        let email = req.body.email;
+        let password = req.body.pass;
+        if (email && password ) {
+            pool.getConnection(function(err, connection){
+                if (err) throw err;
+                connection.query(
+                    `SELECT * FROM login_user WHERE user_email = ? AND user_password = SHA2(?,512)`
+                    , [email, password], function (error, results) {
+                        if (error) throw error;
+                        if (results.length > 0) {
+                            let sql = 'INSERT INTO loglogin set user_email = ?, login_time = ?';
+                            let values = [email, new Date()];
+                            connection.query (sql, values, function(){
+                            })
+                            req.session.longgedin = true;
+                            req.session.user = {
+                                        role: results[0].user_role
+                            };
+                            req.session.userid = results[0].user_id;
+                            req.session.userid = results[0].user_name;
+                            res.redirect('/')
+                        } else {
+                            req.flash('color','danger');
+                        }
+                    })
+            })
+        }  
     }
-
 }
