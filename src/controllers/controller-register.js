@@ -29,7 +29,9 @@ module.exports ={
                     res.redirect('/login');
                 });
             })
-
+        }else {
+            res.redirect('/login');
+            res();
         }
     }
 
