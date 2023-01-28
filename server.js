@@ -19,10 +19,11 @@ app.use(session({
     cookie: { maxAge: 600000 }
   }));
 
-// Configurasi dan  library
-app.use(bodyParser.urlencoded({ extended: false }))
-app.use(bodyParser.json())
+// middleware body-parser
+app.use(express.json());
 app.use(flash());
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 
 
 
@@ -42,5 +43,5 @@ app.use('/', homeRoutes);
 
 //  port server
 app.listen(3000, ()=>{
-    console.log('Server Berjalan di Port : '+3000);
+    console.log('runs well@ Port : '+3000);
 });

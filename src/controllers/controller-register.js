@@ -13,6 +13,7 @@ module.exports ={
         });
     },
     saveRegister(req,res){
+        console.log(req.body);
         let username = req.body.username;
         let email = req.body.email;
         let password = req.body.pass;
@@ -31,7 +32,6 @@ module.exports ={
             })
         }else {
             res.redirect('/login');
-            res();
         }
     }
 
