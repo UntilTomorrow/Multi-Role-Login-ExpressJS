@@ -16,7 +16,7 @@ app.use(session({
     secret: 'Kintilodon',
     resave: false,
     saveUninitialized: true,
-    cookie: { maxAge: 600000 }
+    cookie: { maxAge: 900000 }
   }));
 
 // middleware body-parser
