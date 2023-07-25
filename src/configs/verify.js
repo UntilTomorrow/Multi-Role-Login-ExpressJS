@@ -9,6 +9,14 @@ module.exports = {
                 })
             }
         },
+        isAdmin(req, res, next) {
+            if (req.session.loggedin === true && req.session.role === 'admin') {
+                next(); 
+            } else {
+                res.status(403).send('Forbiden');
+            }
+
+        },
         isLogout(req, res, next){
             if(req.session.loggedin !== true){
                 next();
