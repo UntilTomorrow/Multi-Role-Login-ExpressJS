@@ -10,6 +10,7 @@ const app = express();
 const loginRoutes = require('./src/routes/router-login');
 const registerRoutes = require('./src/routes/router-register');
 const homeRoutes = require('./src/routes/router-home');
+const roleRoutes = require('./src/routes/router-role');
 
 // Configurasi library session
 app.use(session({
@@ -17,7 +18,7 @@ app.use(session({
     resave: false,
     saveUninitialized: true,
     cookie: { maxAge: 900000 }
-  }));
+}));
 
 // middleware body-parser
 app.use(express.json());
@@ -25,23 +26,19 @@ app.use(flash());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-
-
 //  folder views
-app.set('views',path.join(__dirname,'src/views'));
+app.set('views', path.join(__dirname, 'src/views'));
 app.set('view engine', 'ejs');
 
 app.use(express.static(path.join(__dirname, 'public')));
 
-
-
 // Routes yang telah didefinisikan
 app.use('/login', loginRoutes);
 app.use('/register', registerRoutes);
+app.use('/role', roleRoutes);
 app.use('/', homeRoutes);
 
-
 //  port server
-app.listen(3000, ()=>{
-    console.log('runs well@ Port : '+3000);
+app.listen(3000, () => {
+    console.log('runs well@ Port : ' + 3000);
 });
