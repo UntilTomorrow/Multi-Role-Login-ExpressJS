@@ -9,6 +9,18 @@ pool.on('error', (err) => {
 
 module.exports = {
   role(req, res) {
+    const query1 ='SELECT * FROM login_user';
+    const query2 = 'SELECT last_login FROM login_user '
+
+    pool.getConnection(function(err, connection){
+      connection.query(query1, (error, results1) => {
+        if(error)
+            throw error;
+      
+      connection.query(query2, (error, results2) => {
+        if (error)
+        throw error;
+        
     // Pastikan pengguna sudah login
     if (req.session.loggedin !== true) {
       res.redirect('/login');
@@ -22,10 +34,17 @@ module.exports = {
         url: 'http://localhost:3000/',
         userName: req.session.username,
         user: req.session.user,
-      });
-    } else {
-      // Jika pengguna bukan admin, beri respons dengan status 403 Forbidden
-      res.status(403).send('Forbidden');
-    }
+        data: results1,
+        lastlogin: results2,
+
+           });
+          } else {
+            // Jika pengguna bukan admin, beri respons dengan status 403 Forbidden
+            res.status(403).send('Forbidden');
+          }
+        })
+      })
+    })
   }
+  
 };
