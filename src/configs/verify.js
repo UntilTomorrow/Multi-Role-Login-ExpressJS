@@ -10,13 +10,14 @@ module.exports = {
             }
         },
         isAdmin(req, res, next) {
-            if (req.session.loggedin === true && req.session.role === 'admin') {
-                next(); 
+            if (req.session.loggedin === true && req.session.user.role === 'admin') {
+              next();
             } else {
-                res.status(403).send('Forbiden');
+              res.status(403).send('Forbidden');
             }
-
-        },
+            console.log(req.session.user.role)
+          }, 
+            
         isLogout(req, res, next){
             if(req.session.loggedin !== true){
                 next();
