@@ -20,8 +20,8 @@ module.exports ={
             pool.getConnection(function(err, connection) {
                 if (err) throw err;
                 connection.query(
-                    `INSERT INTO login_user (user_name,user_email,user_password) VALUES (?,?,SHA2(?,512));`
-                , [username, email, password],function (error, results) {
+                    `INSERT INTO login_user (user_name,user_email,user_password, user_role) VALUES (?,?,SHA2(?,512),?);`
+                , [username, email, password, 'user'],function (error, results) {
                     if (error) throw error; 
                     req.flash('color', 'success');
                     req.flash('status', 'Yes..');
