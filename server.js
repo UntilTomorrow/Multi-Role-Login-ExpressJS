@@ -11,6 +11,7 @@ const loginRoutes = require('./src/routes/router-login');
 const registerRoutes = require('./src/routes/router-register');
 const homeRoutes = require('./src/routes/router-home');
 const roleRoutes = require('./src/routes/router-role');
+const profileRoutes = require('./src/routes/router-profile');
 
 // Configurasi library session
 app.use(session({
@@ -36,6 +37,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/login', loginRoutes);
 app.use('/register', registerRoutes);
 app.use('/role', roleRoutes);
+app.use('/profile', profileRoutes);
 app.use('/', homeRoutes);
 
 //  port server
